@@ -1,20 +1,32 @@
-
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { products } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
 import { Heart, ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const ProductDetailPage = () => {
   const { productId } = useParams<{ productId: string }>();
   const product = products.find(p => p.id === productId);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   if (!product) {
     return <Layout><div>Product not found</div></Layout>;
   }
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.salePrice || product.price,
+      image: product.images[0]
+    });
+    navigate('/cart');
+  };
 
   return (
     <Layout>
@@ -57,7 +69,7 @@ const ProductDetailPage = () => {
           <p className="text-muted-foreground mb-6">{product.description}</p>
 
           <div className="flex space-x-4 mb-6">
-            <Button size="lg" className="flex-1">
+            <Button size="lg" className="flex-1" onClick={handleAddToCart}>
               <ShoppingCart className="mr-2 h-5 w-5" /> Add to Cart
             </Button>
             <Button variant="outline" size="icon">
