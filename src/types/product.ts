@@ -18,7 +18,10 @@ export type ProductCategory =
   | 'tops'
   | 'bottoms'
   | 'outerwear'
-  | 'accessories';
+  | 'accessories'
+  | 'activewear'
+  | 'swimwear'
+  | 'formal';
 
 export type ProductTag =
   | 'eco-friendly'
@@ -26,4 +29,6 @@ export type ProductTag =
   | 'recycled'
   | 'sustainable'
   | 'modest'
-  | 'faith-based';
+  | 'faith-based'
+  | 'new-arrival'
+  | 'bestseller';

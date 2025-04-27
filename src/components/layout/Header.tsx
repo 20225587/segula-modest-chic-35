@@ -5,25 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { categories } from "@/data/categories";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const isMobile = useIsMobile();
 
-  const categories = [
-    { name: "Dresses", path: "/categories/dresses" },
-    { name: "Tops", path: "/categories/tops" },
-    { name: "Bottoms", path: "/categories/bottoms" },
-    { name: "Outerwear", path: "/categories/outerwear" },
-    { name: "Accessories", path: "/categories/accessories" }
-  ];
-
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
-      {/* Main header content */}
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Mobile menu button */}
         <Button 
           variant="ghost" 
           size="icon" 
@@ -33,28 +24,30 @@ const Header = () => {
           <Menu className="h-6 w-6" />
         </Button>
 
-        {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="text-2xl font-serif font-bold tracking-tight">
             Segula
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {categories.map((category) => (
+        <nav className="hidden md:flex items-center space-x-4 lg:space-x-8 overflow-x-auto">
+          {categories.slice(0, 6).map((category) => (
             <Link 
               key={category.name}
               to={category.path}
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className="text-sm whitespace-nowrap font-medium hover:text-primary transition-colors"
             >
               {category.name}
             </Link>
           ))}
+          <Button variant="ghost" size="sm" asChild>
+            <Link to="/categories" className="whitespace-nowrap">
+              All Categories
+            </Link>
+          </Button>
         </nav>
 
-        {/* Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           {!isSearchOpen ? (
             <Button 
               variant="ghost" 
@@ -91,8 +84,9 @@ const Header = () => {
                       onClick={() => {
                         setIsSearchOpen(false);
                       }}
+                      asChild
                     >
-                      {category.name}
+                      <Link to={category.path}>{category.name}</Link>
                     </Button>
                   ))}
                 </div>
@@ -107,9 +101,9 @@ const Header = () => {
           </Link>
 
           <Link to="/cart">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="relative">
               <ShoppingBag className="h-5 w-5" />
-              <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-primary-foreground text-[10px] flex items-center justify-center rounded-full">
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-primary-foreground text-[10px] flex items-center justify-center rounded-full">
                 2
               </span>
             </Button>
@@ -119,9 +113,13 @@ const Header = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-background z-50 animate-fade-in">
-          <div className="flex justify-between items-center p-4 border-b">
-            <Link to="/" className="text-2xl font-serif font-bold tracking-tight">
+        <div className="fixed inset-0 bg-background z-50 animate-fade-in overflow-y-auto">
+          <div className="flex justify-between items-center p-4 border-b sticky top-0 bg-background">
+            <Link 
+              to="/" 
+              className="text-2xl font-serif font-bold tracking-tight"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Segula
             </Link>
             <Button 
@@ -133,37 +131,41 @@ const Header = () => {
             </Button>
           </div>
           <nav className="p-4">
-            <ul className="space-y-4">
+            <div className="space-y-4">
               {categories.map((category) => (
-                <li key={category.name}>
-                  <Link 
-                    to={category.path}
-                    className="block py-2 text-lg border-b border-border"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {category.name}
-                  </Link>
-                </li>
+                <Link 
+                  key={category.name}
+                  to={category.path}
+                  className="block py-2 text-lg border-b border-border"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {category.name}
+                </Link>
               ))}
-              <li>
-                <Link 
-                  to="/about"
-                  className="block py-2 text-lg border-b border-border"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/contact"
-                  className="block py-2 text-lg border-b border-border"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
+            </div>
+            <div className="mt-8 space-y-4">
+              <Link 
+                to="/about"
+                className="block py-2 text-lg border-b border-border"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About Us
+              </Link>
+              <Link 
+                to="/contact"
+                className="block py-2 text-lg border-b border-border"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link 
+                to="/sustainability"
+                className="block py-2 text-lg border-b border-border"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sustainability
+              </Link>
+            </div>
           </nav>
         </div>
       )}
