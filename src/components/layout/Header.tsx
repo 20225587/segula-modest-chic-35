@@ -1,6 +1,6 @@
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
@@ -11,11 +11,15 @@ import {
   DrawerTrigger,
   DrawerClose
 } from "@/components/ui/drawer";
+import { useSearch } from "@/hooks/use-search";
+import ProductCard from "@/components/product/ProductCard";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+  const { searchQuery, setSearchQuery, searchResults, handleSearch } = useSearch();
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -26,6 +30,24 @@ const Header = () => {
     { name: "Subscribe", path: "/subscribe" },
     { name: "Customer Support", path: "/customer-support" },
   ];
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    handleSearch(query);
+  };
+
+  const handleProductClick = (productId: string) => {
+    setIsSearchOpen(false);
+    navigate(`/product/${productId}`);
+  };
+
+  // Clear search when the search overlay is closed
+  useEffect(() => {
+    if (!isSearchOpen) {
+      setSearchQuery("");
+    }
+  }, [isSearchOpen, setSearchQuery]);
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
@@ -116,6 +138,8 @@ const Header = () => {
                     placeholder="Search for products..." 
                     className="flex-1 text-sm"
                     autoFocus
+                    value={searchQuery}
+                    onChange={handleSearchInput}
                   />
                   <Button 
                     variant="ghost" 
@@ -126,21 +150,76 @@ const Header = () => {
                     <X className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
-                  {navItems.map((item) => (
+
+                {searchQuery.trim() === "" ? (
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+                    {navItems.map((item) => (
+                      <Button 
+                        key={item.name}
+                        variant="outline"
+                        className="justify-start text-xs sm:text-sm h-8 sm:h-10"
+                        onClick={() => {
+                          setIsSearchOpen(false);
+                        }}
+                        asChild
+                      >
+                        <Link to={item.path}>{item.name}</Link>
+                      </Button>
+                    ))}
+                  </div>
+                ) : searchResults.length > 0 ? (
+                  <div className="mt-4">
+                    <h2 className="text-sm font-medium mb-2">Search Results ({searchResults.length})</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                      {searchResults.slice(0, 6).map((product) => (
+                        <div 
+                          key={product.id} 
+                          className="cursor-pointer"
+                          onClick={() => handleProductClick(product.id)}
+                        >
+                          <div className="flex items-center gap-2 border rounded-md p-2 hover:bg-accent transition-colors">
+                            <div className="h-10 w-10 shrink-0 rounded-md overflow-hidden">
+                              <img 
+                                src={product.images[0]} 
+                                alt={product.name}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium line-clamp-1">{product.name}</p>
+                              <p className="text-xs text-muted-foreground">${product.price.toFixed(2)}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {searchResults.length > 6 && (
+                      <div className="text-center mt-4">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            navigate(`/available-stock?search=${encodeURIComponent(searchQuery)}`);
+                            setIsSearchOpen(false);
+                          }}
+                        >
+                          View all {searchResults.length} results
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-muted-foreground">No products found matching "{searchQuery}"</p>
                     <Button 
-                      key={item.name}
-                      variant="outline"
-                      className="justify-start text-xs sm:text-sm h-8 sm:h-10"
-                      onClick={() => {
-                        setIsSearchOpen(false);
-                      }}
-                      asChild
+                      variant="link" 
+                      onClick={() => navigate("/available-stock")}
+                      className="mt-2"
                     >
-                      <Link to={item.path}>{item.name}</Link>
+                      Browse all products
                     </Button>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
