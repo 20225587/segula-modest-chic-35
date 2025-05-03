@@ -5,10 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+  DrawerClose
+} from "@/components/ui/drawer";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isMobile = useIsMobile();
 
   const navItems = [
@@ -24,14 +30,47 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
       <div className="container mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between">
-        <Button 
-          variant="ghost" 
-          size="sm"
-          className="md:hidden p-1"
-          onClick={() => setIsMenuOpen(true)}
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
+        <div className="md:hidden">
+          <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+            <DrawerTrigger asChild>
+              <Button variant="ghost" size="sm" className="p-1">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent className="h-[80vh] max-h-[80vh]">
+              <div className="p-4 border-b">
+                <div className="flex items-center justify-between">
+                  <Link 
+                    to="/" 
+                    className="text-xl font-serif font-bold tracking-tight"
+                    onClick={() => setIsDrawerOpen(false)}
+                  >
+                    Segula
+                  </Link>
+                  <DrawerClose asChild>
+                    <Button variant="ghost" size="sm" className="p-1">
+                      <X className="h-5 w-5" />
+                    </Button>
+                  </DrawerClose>
+                </div>
+              </div>
+              <nav className="p-4 overflow-y-auto">
+                <div className="space-y-3">
+                  {navItems.map((item) => (
+                    <Link 
+                      key={item.name}
+                      to={item.path}
+                      className="block py-2 text-base border-b border-border"
+                      onClick={() => setIsDrawerOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              </nav>
+            </DrawerContent>
+          </Drawer>
+        </div>
 
         <div className="flex items-center">
           <Link to="/" className="text-xl sm:text-2xl font-serif font-bold tracking-tight">
@@ -122,43 +161,6 @@ const Header = () => {
           </Link>
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-background z-50 animate-fade-in overflow-y-auto">
-          <div className="flex justify-between items-center p-3 sm:p-4 border-b sticky top-0 bg-background">
-            <Link 
-              to="/" 
-              className="text-xl sm:text-2xl font-serif font-bold tracking-tight"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Segula
-            </Link>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              className="p-1"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-          <nav className="p-3 sm:p-4">
-            <div className="space-y-3">
-              {navItems.map((item) => (
-                <Link 
-                  key={item.name}
-                  to={item.path}
-                  className="block py-2 text-base sm:text-lg border-b border-border"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </nav>
-        </div>
-      )}
     </header>
   );
 };

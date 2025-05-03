@@ -7,7 +7,7 @@ import { products } from "@/data/products";
 const AvailableStockPage = () => {
   return (
     <Layout>
-      <div className="segula-container py-8 sm:py-12 md:py-16">
+      <div className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16">
         <SectionHeading 
           title="Available Stock" 
           description="Browse our current inventory of products available for purchase"
