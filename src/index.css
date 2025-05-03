@@ -92,6 +92,11 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
   }
@@ -99,22 +104,55 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
   }
+  
+  /* Responsive typography */
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  h3 {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
 }
 
 @layer components {
   .segula-container {
-    @apply container mx-auto px-4 md:px-6 py-8;
+    @apply container mx-auto px-4 md:px-6 py-6 md:py-8;
   }
   
   .segula-section {
-    @apply py-12 md:py-16 lg:py-20;
+    @apply py-8 md:py-12 lg:py-16;
   }
   
   .segula-heading {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold font-serif;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif;
   }
   
   .segula-subheading {
-    @apply text-xl md:text-2xl font-medium text-foreground/80 mt-2;
+    @apply text-lg sm:text-xl md:text-2xl font-medium text-foreground/80 mt-2;
+  }
+  
+  /* Responsive image containers */
+  .responsive-image-container {
+    @apply w-full h-auto aspect-[4/3] sm:aspect-[16/9] md:aspect-[3/2] overflow-hidden;
+  }
+  
+  .responsive-image {
+    @apply w-full h-full object-cover;
+  }
+}
+
+/* Custom media query styles */
+@media (max-width: 640px) {
+  .segula-container {
+    @apply px-3 py-4;
+  }
+  
+  .segula-section {
+    @apply py-6;
   }
 }

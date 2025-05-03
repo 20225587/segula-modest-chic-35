@@ -36,13 +36,13 @@ const FeaturedProducts = ({
           description={description}
         />
         
-        <div className="mt-8 md:mt-12">
+        <div className="mt-6 sm:mt-8 md:mt-12">
           <ProductGrid products={visibleProducts} />
         </div>
         
         {products.length > 4 && (
-          <div className="mt-10 text-center">
-            <Button onClick={handleViewMore} variant="outline" size="lg">
+          <div className="mt-6 sm:mt-8 md:mt-10 text-center">
+            <Button onClick={handleViewMore} variant="outline" size="sm" className="text-xs sm:text-sm md:text-base h-8 sm:h-9 md:h-10">
               {showingAll ? "View Less" : "View More"}
             </Button>
           </div>

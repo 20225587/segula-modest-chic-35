@@ -6,48 +6,48 @@ import { Facebook, Instagram, Twitter } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-muted mt-16">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="bg-muted mt-8 sm:mt-12 md:mt-16">
+      <div className="container mx-auto px-3 sm:px-4 py-8 sm:py-12">
         {/* Newsletter */}
-        <div className="max-w-xl mx-auto text-center mb-12">
-          <h3 className="text-2xl font-serif font-bold mb-3">Join Our Community</h3>
-          <p className="mb-6 text-muted-foreground">
+        <div className="max-w-xl mx-auto text-center mb-8 sm:mb-12">
+          <h3 className="text-xl sm:text-2xl font-serif font-bold mb-2 sm:mb-3">Join Our Community</h3>
+          <p className="mb-4 sm:mb-6 text-muted-foreground text-sm sm:text-base">
             Subscribe to our newsletter for exclusive offers, modesty style tips, and updates on our sustainable practices.
           </p>
           <div className="flex flex-col sm:flex-row gap-2">
-            <Input placeholder="Your email address" type="email" className="sm:flex-1" />
-            <Button>Subscribe</Button>
+            <Input placeholder="Your email address" type="email" className="sm:flex-1 text-sm sm:text-base h-9 sm:h-10" />
+            <Button className="h-9 sm:h-10 text-sm sm:text-base">Subscribe</Button>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-8 border-t border-border">
-          <div>
-            <h4 className="font-serif font-bold text-lg mb-4">Segula Collection</h4>
-            <p className="text-sm text-muted-foreground mb-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-6 sm:py-8 border-t border-border">
+          <div className="col-span-2 md:col-span-1 mb-4 md:mb-0">
+            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Segula Collection</h4>
+            <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
               Embracing modesty and sustainability in fashion, inspired by faith and commitment to ethical practices.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-2 sm:space-x-4">
               <Link to="#" aria-label="Facebook">
-                <Button variant="ghost" size="icon">
-                  <Facebook className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                  <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </Link>
               <Link to="#" aria-label="Instagram">
-                <Button variant="ghost" size="icon">
-                  <Instagram className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                  <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </Link>
               <Link to="#" aria-label="Twitter">
-                <Button variant="ghost" size="icon">
-                  <Twitter className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                  <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </Link>
             </div>
           </div>
           
           <div>
-            <h4 className="font-serif font-bold text-lg mb-4">Shop</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Shop</h4>
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
               <li>
                 <Link to="/categories/dresses" className="hover:text-primary transition-colors">
                   Dresses
@@ -77,8 +77,8 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-serif font-bold text-lg mb-4">About</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">About</h4>
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
               <li>
                 <Link to="/about" className="hover:text-primary transition-colors">
                   Our Story
@@ -108,8 +108,8 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-serif font-bold text-lg mb-4">Customer Service</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Customer Service</h4>
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
               <li>
                 <Link to="/contact" className="hover:text-primary transition-colors">
                   Contact Us
@@ -139,7 +139,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
+        <div className="pt-6 sm:pt-8 border-t border-border text-center text-xs sm:text-sm text-muted-foreground">
           <p>
             &copy; {new Date().getFullYear()} Segula Collection. All rights reserved.
           </p>
