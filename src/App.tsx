@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,13 +7,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import CategoryPage from "./pages/CategoryPage";
-import ProductDetailPage from "./pages/ProductDetailPage";
-import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
-import SustainabilityPage from "./pages/SustainabilityPage";
 import CartPage from "./pages/CartPage";
-import CategoriesPage from "./pages/CategoriesPage";
+
+// New Pages
+import OurServicesPage from "./pages/OurServicesPage";
+import AvailableStockPage from "./pages/AvailableStockPage";
+import BlogPage from "./pages/BlogPage";
+import ClientReviewsPage from "./pages/ClientReviewsPage";
+import SubscribePage from "./pages/SubscribePage";
+import CustomerSupportPage from "./pages/CustomerSupportPage";
 
 const queryClient = new QueryClient();
 
@@ -25,13 +28,13 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/categories" element={<CategoriesPage />} />
-            <Route path="/categories/:category" element={<CategoryPage />} />
-            <Route path="/product/:productId" element={<ProductDetailPage />} />
+            <Route path="/our-services" element={<OurServicesPage />} />
+            <Route path="/available-stock" element={<AvailableStockPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/client-reviews" element={<ClientReviewsPage />} />
+            <Route path="/subscribe" element={<SubscribePage />} />
+            <Route path="/customer-support" element={<CustomerSupportPage />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/sustainability" element={<SustainabilityPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -5,12 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { categories } from "@/data/categories";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const isMobile = useIsMobile();
+
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Our Services", path: "/our-services" },
+    { name: "Available Stock", path: "/available-stock" },
+    { name: "Blog", path: "/blog" },
+    { name: "Client Reviews", path: "/client-reviews" },
+    { name: "Subscribe", path: "/subscribe" },
+    { name: "Customer Support", path: "/customer-support" },
+  ];
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
@@ -31,20 +40,22 @@ const Header = () => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-2 lg:space-x-6 overflow-x-auto text-xs lg:text-sm">
-          {categories.slice(0, 6).map((category) => (
+          {navItems.slice(0, 6).map((item) => (
             <Link 
-              key={category.name}
-              to={category.path}
+              key={item.name}
+              to={item.path}
               className="whitespace-nowrap font-medium hover:text-primary transition-colors"
             >
-              {category.name}
+              {item.name}
             </Link>
           ))}
-          <Button variant="ghost" size="sm" asChild className="text-xs lg:text-sm">
-            <Link to="/categories" className="whitespace-nowrap">
-              All Categories
-            </Link>
-          </Button>
+          {navItems.length > 6 && (
+            <Button variant="ghost" size="sm" asChild className="text-xs lg:text-sm">
+              <Link to={navItems[6].path} className="whitespace-nowrap">
+                {navItems[6].name}
+              </Link>
+            </Button>
+          )}
         </nav>
 
         <div className="flex items-center space-x-1 sm:space-x-2">
@@ -77,9 +88,9 @@ const Header = () => {
                   </Button>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
-                  {categories.map((category) => (
+                  {navItems.map((item) => (
                     <Button 
-                      key={category.name}
+                      key={item.name}
                       variant="outline"
                       className="justify-start text-xs sm:text-sm h-8 sm:h-10"
                       onClick={() => {
@@ -87,7 +98,7 @@ const Header = () => {
                       }}
                       asChild
                     >
-                      <Link to={category.path}>{category.name}</Link>
+                      <Link to={item.path}>{item.name}</Link>
                     </Button>
                   ))}
                 </div>
@@ -134,39 +145,16 @@ const Header = () => {
           </div>
           <nav className="p-3 sm:p-4">
             <div className="space-y-3">
-              {categories.map((category) => (
+              {navItems.map((item) => (
                 <Link 
-                  key={category.name}
-                  to={category.path}
+                  key={item.name}
+                  to={item.path}
                   className="block py-2 text-base sm:text-lg border-b border-border"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {category.name}
+                  {item.name}
                 </Link>
               ))}
-            </div>
-            <div className="mt-6 space-y-3">
-              <Link 
-                to="/about"
-                className="block py-2 text-base sm:text-lg border-b border-border"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About Us
-              </Link>
-              <Link 
-                to="/contact"
-                className="block py-2 text-base sm:text-lg border-b border-border"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
-              <Link 
-                to="/sustainability"
-                className="block py-2 text-base sm:text-lg border-b border-border"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sustainability
-              </Link>
             </div>
           </nav>
         </div>

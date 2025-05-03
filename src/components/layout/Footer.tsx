@@ -10,9 +10,9 @@ const Footer = () => {
       <div className="container mx-auto px-3 sm:px-4 py-8 sm:py-12">
         {/* Newsletter */}
         <div className="max-w-xl mx-auto text-center mb-8 sm:mb-12">
-          <h3 className="text-xl sm:text-2xl font-serif font-bold mb-2 sm:mb-3">Join Our Community</h3>
+          <h3 className="text-xl sm:text-2xl font-serif font-bold mb-2 sm:mb-3">Subscribe to Updates</h3>
           <p className="mb-4 sm:mb-6 text-muted-foreground text-sm sm:text-base">
-            Subscribe to our newsletter for exclusive offers, modesty style tips, and updates on our sustainable practices.
+            Get the latest updates on our services, available stock, and customer reviews.
           </p>
           <div className="flex flex-col sm:flex-row gap-2">
             <Input placeholder="Your email address" type="email" className="sm:flex-1 text-sm sm:text-base h-9 sm:h-10" />
@@ -24,7 +24,7 @@ const Footer = () => {
           <div className="col-span-2 md:col-span-1 mb-4 md:mb-0">
             <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Segula Collection</h4>
             <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
-              Embracing modesty and sustainability in fashion, inspired by faith and commitment to ethical practices.
+              Providing quality services and products for our customers.
             </p>
             <div className="flex space-x-2 sm:space-x-4">
               <Link to="#" aria-label="Facebook">
@@ -46,57 +46,21 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Shop</h4>
+            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Navigation</h4>
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
               <li>
-                <Link to="/categories/dresses" className="hover:text-primary transition-colors">
-                  Dresses
+                <Link to="/" className="hover:text-primary transition-colors">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link to="/categories/tops" className="hover:text-primary transition-colors">
-                  Tops
+                <Link to="/our-services" className="hover:text-primary transition-colors">
+                  Our Services
                 </Link>
               </li>
               <li>
-                <Link to="/categories/bottoms" className="hover:text-primary transition-colors">
-                  Bottoms
-                </Link>
-              </li>
-              <li>
-                <Link to="/categories/outerwear" className="hover:text-primary transition-colors">
-                  Outerwear
-                </Link>
-              </li>
-              <li>
-                <Link to="/categories/accessories" className="hover:text-primary transition-colors">
-                  Accessories
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">About</h4>
-            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
-              <li>
-                <Link to="/about" className="hover:text-primary transition-colors">
-                  Our Story
-                </Link>
-              </li>
-              <li>
-                <Link to="/sustainability" className="hover:text-primary transition-colors">
-                  Sustainability
-                </Link>
-              </li>
-              <li>
-                <Link to="/ethical-practices" className="hover:text-primary transition-colors">
-                  Ethical Practices
-                </Link>
-              </li>
-              <li>
-                <Link to="/faith-values" className="hover:text-primary transition-colors">
-                  Faith Values
+                <Link to="/available-stock" className="hover:text-primary transition-colors">
+                  Available Stock
                 </Link>
               </li>
               <li>
@@ -108,32 +72,43 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Customer Service</h4>
+            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Resources</h4>
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
               <li>
-                <Link to="/contact" className="hover:text-primary transition-colors">
+                <Link to="/client-reviews" className="hover:text-primary transition-colors">
+                  Client Reviews
+                </Link>
+              </li>
+              <li>
+                <Link to="/subscribe" className="hover:text-primary transition-colors">
+                  Subscribe
+                </Link>
+              </li>
+              <li>
+                <Link to="/customer-support" className="hover:text-primary transition-colors">
+                  Customer Support
+                </Link>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="font-serif font-bold text-base sm:text-lg mb-3 sm:mb-4">Contact</h4>
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
+              <li>
+                <Link to="/customer-support" className="hover:text-primary transition-colors">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link to="/shipping" className="hover:text-primary transition-colors">
-                  Shipping & Returns
-                </Link>
+                <a href="mailto:info@segula.com" className="hover:text-primary transition-colors">
+                  info@segula.com
+                </a>
               </li>
               <li>
-                <Link to="/faq" className="hover:text-primary transition-colors">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link to="/size-guide" className="hover:text-primary transition-colors">
-                  Size Guide
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy" className="hover:text-primary transition-colors">
-                  Privacy Policy
-                </Link>
+                <a href="tel:+1234567890" className="hover:text-primary transition-colors">
+                  +1 (234) 567-890
+                </a>
               </li>
             </ul>
           </div>
