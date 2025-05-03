@@ -2,11 +2,9 @@
 import Layout from "@/components/layout/Layout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProductGrid from "@/components/product/ProductGrid";
-import { getProducts } from "@/data/products";
+import { products } from "@/data/products";
 
 const AvailableStockPage = () => {
-  const products = getProducts();
-
   return (
     <Layout>
       <div className="segula-container py-8 sm:py-12 md:py-16">
